@@ -27,22 +27,22 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birth_date_id      | string | null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | ------------ |
+| nickname           | string | null: false  |
+| email              | string | unique: true |
+| encrypted_password | string | null: false  |
+| last_name          | string | null: false  |
+| first_name         | string | null: false  |
+| last_name_kana     | string | null: false  |
+| first_name_kana    | string | null: false  |
+| birth_date_id      | date   | null: false  |
 
 ### Association
 
 - has_many :furimas
-- has_many :cards
-- has_many :shipping_addresses
+- has_many :destinations
+- has_many :logs
 
 ## furimas テーブル
 
@@ -61,30 +61,30 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
+- has_one :log
 
-## cards テーブル
+## logs テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| card_number     | integer    | null: false                    |
-| expiration_date | integer    | null: false                    |
-| cvc             | integer    | null: false                    |
+| furima          | references | null: false, foreign_key: true |
 | user            | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
+- belongs_to :furima
 
-## shipping_addresses テーブル
+## destinations テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
+| postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | addresses     | string     | null: false                    |
 | home_name     | string     |                                |
-| phone_number  | integer    | null: false                    |
+| phone_number  | string     | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
 

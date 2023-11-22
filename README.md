@@ -74,6 +74,7 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :furima
+- has_one :destination
 
 ## destinations テーブル
 
@@ -85,9 +86,9 @@ Things you may want to cover:
 | addresses     | string     | null: false                    |
 | home_name     | string     |                                |
 | phone_number  | string     | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| log           | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user
+- belongs_to :iog

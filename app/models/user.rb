@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
   validates :birth_date, presence: true
-  validates :password_confirmation, presence: true
-  
+
+
   validates :password,
     presence: true,
     length: { minimum: 6 },

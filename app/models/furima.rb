@@ -7,4 +7,5 @@ class Furima < ApplicationRecord
   belongs_to :sales_status
   belongs_to :shipping_fee_status
   belongs_to :prefecture
+  belongs_to :scheduled_delivery
 end

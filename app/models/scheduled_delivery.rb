@@ -6,4 +6,7 @@ class ScheduledDelivery < ActiveHash::Base
     { id: 3, name: '4~7日で発送' }
   ]
 
+  include ActiveHash::Associations
+  has_many :furimas
+
   end

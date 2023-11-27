@@ -1,10 +1,4 @@
 class Furima < ApplicationRecord
   belongs_to :user
-
-  def change
-    create_table :furimas do |t|
-
-      t.timestamps
-    end
-  end
+  has_one_attachsd :image
 end

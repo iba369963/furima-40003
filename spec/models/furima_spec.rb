@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Furima, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @furima = FactoryBot.build(:furima, user_id: @user.id)
+
+    @furima = FactoryBot.build(:furima)
   end
 
   describe '商品出品' do
@@ -76,6 +76,11 @@ RSpec.describe Furima, type: :model do
         @furima.price = 'aあ１'
         @furima.valid?
         expect(@furima.errors.full_messages)
+      end
+      it 'ユーザーが紐付いていなければ保存できない' do
+        @furima.user = nil
+        @furima.valid?
+        expect(@furima.errors.full_messages).to include('User must exist')
       end
     end
   end

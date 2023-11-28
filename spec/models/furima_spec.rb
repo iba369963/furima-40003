@@ -62,6 +62,21 @@ RSpec.describe Furima, type: :model do
         @furima.valid?
         expect(@furima.errors.full_messages).to include "Price can't be blank"
       end
+      it '価格が300円未満では登録できない' do
+        @furima.price = '299'
+        @furima.valid?
+        expect(@furima.errors.full_messages)
+      end
+      it '価格が10,000,000円以上では登録できない' do
+        @furima.price = '10000000'
+        @furima.valid?
+        expect(@furima.errors.full_messages)
+      end
+      it '価格は半角数値以外では保存できない' do
+        @furima.price = 'aあ１'
+        @furima.valid?
+        expect(@furima.errors.full_messages)
+      end
     end
   end
 end

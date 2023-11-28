@@ -14,7 +14,9 @@ class Furima < ApplicationRecord
   validates :info, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   validates_format_of :price, with: /\A[0-9]+\z/
-  
+  validates :name, length: { maximum: 40 }
+  validates :info, length: { maximum: 1000 }
+
   validates :category_id, numericality: { other_than: 1 }
   validates :sales_status_id, numericality: { other_than: 1 }
   validates :shipping_fee_status_id, numericality: { other_than: 1 }

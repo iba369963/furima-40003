@@ -1,5 +1,5 @@
 class FurimasController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :check_owner, only: [:edit, :update]
   before_action :set_furima, only: [:show, :edit, :update, :destroy]
 

@@ -13,6 +13,14 @@ class FurimasController < ApplicationController
     @furima = Furima.find(params[:id])
   end
 
+  def edit
+    @furima = Furima.find(params[:id])
+  end
+
+  def update
+    @furima = Furima.find(params[:id])
+  end
+
   def create
     @furima = Furima.new(furima_params)
     if @furima.save

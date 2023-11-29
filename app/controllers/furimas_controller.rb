@@ -1,6 +1,7 @@
 class FurimasController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   before_action :check_owner, only: [:edit, :update]
+  before_action :set_furima, only: [:show, :edit, :update]
 
   def index
     @furimas = Furima.includes(:user).order("created_at DESC")
@@ -11,15 +12,15 @@ class FurimasController < ApplicationController
   end
 
   def show
-    @furima = Furima.find(params[:id])
+
   end
 
   def edit
-    @furima = Furima.find(params[:id])
+
   end
 
   def update
-    @furima = Furima.find(params[:id])
+
     if @furima.update(furima_params)
       redirect_to furima_path(@furima.id)
     else
@@ -37,6 +38,10 @@ class FurimasController < ApplicationController
   end
 
   private
+
+  def set_furima
+    @furima = Furima.find(params[:id])
+  end
 
   def furima_params
     params.require(:furima).permit(

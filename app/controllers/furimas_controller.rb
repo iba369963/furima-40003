@@ -1,7 +1,7 @@
 class FurimasController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :check_owner, only: [:edit, :update]
-  before_action :set_furima, only: [:show, :edit, :update]
+  before_action :set_furima, only: [:show, :edit, :update, :destroy]
 
   def index
     @furimas = Furima.includes(:user).order("created_at DESC")
@@ -35,6 +35,13 @@ class FurimasController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    if current_user == @furima.user
+      @furima.destroy
+    end
+    redirect_to root_path
   end
 
   private

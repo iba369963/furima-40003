@@ -9,6 +9,10 @@ class FurimasController < ApplicationController
     @furima = Furima.new
   end
 
+  def show
+    @furima = Furima.find(params[:id])
+  end
+
   def create
     @furima = Furima.new(furima_params)
     if @furima.save

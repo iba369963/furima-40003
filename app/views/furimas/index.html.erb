@@ -132,7 +132,7 @@
       <% @furimas.each do |furima| %>
       
         <li class='list'>
-          <%= link_to "#" do %>
+          <%= link_to furima_path(furima.id) do %>
           <div class='item-img-content'>
 
             <%= image_tag furima.image.variant(resize: '300x300'), class: 'furima-image' if furima.image.attached? %>

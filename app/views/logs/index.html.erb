@@ -14,7 +14,7 @@
         </h2>
         <div class='buy-item-price'>
           <p class='item-price-text'>¥<%= @furima.price %> -10%(販売手数料) </p>
-          <p class='item-price-sub-text'><%= '配送料負担' %></p>
+          <p class='item-price-sub-text'><%= @furima.shipping_fee_status.name %></p>
         </div>
       </div>
     </div>

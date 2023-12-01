@@ -38,6 +38,7 @@ class FurimasController < ApplicationController
   end
 
   def destroy
+
     if current_user == @furima.user
       @furima.destroy
     end

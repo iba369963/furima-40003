@@ -1,6 +1,6 @@
 class Order
   include ActiveModel::Model
-  attr_accessor :user_id, :furima_id, :postal_code, :prefecture_id, :city, :addresses, :home_name, :phone_number, :log_id
+  attr_accessor :user_id, :furima_id, :postal_code, :prefecture_id, :city, :addresses, :home_name, :phone_number
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: "は「3桁ハイフン4桁」の形式で入力してください" }
@@ -9,7 +9,11 @@ class Order
   end
 
   def save
+    # ログの保存
     log = Log.create(user_id: user_id, furima_id: furima_id)
-    Destination.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses, home_name: home_name, phone_number: phone_number, log_id: log.id)
+
+    # 宛先情報の保存
+    destination = Destination.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses, home_name: home_name, phone_number: phone_number, log_id: log.id)
+
   end
 end

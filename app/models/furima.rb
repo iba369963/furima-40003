@@ -1,5 +1,6 @@
 class Furima < ApplicationRecord
   belongs_to :user
+  has_one :log
   has_one_attached :image
   
   extend ActiveHash::Associations::ActiveRecordExtensions

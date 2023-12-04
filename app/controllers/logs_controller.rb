@@ -3,7 +3,7 @@ class LogsController < ApplicationController
 
 
   def index
-    @furima = Furima.new
+    @order = Order.new
     @furima = Furima.find(params[:furima_id])
   end
 

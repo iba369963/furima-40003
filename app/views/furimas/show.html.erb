@@ -26,14 +26,14 @@
     </div>
 
 
-  <% if user_signed_in? && current_user == @furima.user %>
+  <% if user_signed_in? && current_user == @furima.user && !@furima.sold_out? %>
     <%= link_to "商品の編集", edit_furima_path(@furima.id), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", furima_path(@furima.id),data: { turbo_method: :delete }, method: :delete, class:"item-destroy" %>
   <% elsif user_signed_in? && !@furima.sold_out? %>
-    <%# 商品が売れていない場合はこちらを表示しましょう %>
+
     <%= link_to "購入画面に進む", furima_logs_path(@furima.id) ,class:"item-red-btn"%>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
+   
   <% end %>
 
 

@@ -8,13 +8,13 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @furima.image,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      
       <% if @furima.sold_out? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
       <%end%>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -30,7 +30,7 @@
     <%= link_to "商品の編集", edit_furima_path(@furima.id), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", furima_path(@furima.id),data: { turbo_method: :delete }, method: :delete, class:"item-destroy" %>
-  <% elsif user_signed_in? %>
+  <% elsif user_signed_in? && !@furima.sold_out? %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
     <%= link_to "購入画面に進む", furima_logs_path(@furima.id) ,class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示しましょう %>

@@ -13,7 +13,7 @@
           <%= @furima.name %>
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= @furima.price %> -10%(販売手数料) </p>
+          <p class='item-price-text'>¥<%= @furima.price %></p>
           <p class='item-price-sub-text'><%= @furima.shipping_fee_status.name %></p>
         </div>
       </div>
@@ -26,7 +26,7 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= (@furima.price - @furima.price * 0.1).to_i %>
+        ¥<%= @furima.price %>
       </p>
     </div>
     <%# /支払額の表示 %>

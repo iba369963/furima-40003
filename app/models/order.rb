@@ -9,6 +9,8 @@ class Order
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "は10桁以上11桁以内の半角数値で入力してください" }
     validates :token, presence: true
+    validates :city, presence: true
+    validates :addresses, presence: true
   end
 
   def save

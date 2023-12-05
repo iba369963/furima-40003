@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Furima, type: :model do
   before do
-
     @furima = FactoryBot.build(:furima)
   end
 

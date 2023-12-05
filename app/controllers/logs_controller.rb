@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
   before_action :authenticate_user!, except: :index
-
+  before_action :check_furima_owner, only: [:index, :edit]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -37,6 +37,26 @@ class LogsController < ApplicationController
     ).merge(user_id: current_user.id, furima_id: @furima.id, token: params[:token])
   end
   
+  def check_furima_owner
+    @furima = Furima.find(params[:furima_id])
+
+    if user_signed_in?
+      # ログイン状態の場合
+      case action_name
+      when "index"
+        # 商品購入ページにアクセスしようとした場合
+        redirect_to root_path unless current_user != @furima.user && !@furima.sold_out?
+      # when "edit"
+      #   # 商品情報編集ページにアクセスしようとした場合
+      #   redirect_to root_path unless current_user != @furima.user || @furima.sold_out?
+      end
+    else
+      # ログアウト状態の場合
+      redirect_to new_user_session_path
+    end
+  end
+
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
   Payjp::Charge.create(

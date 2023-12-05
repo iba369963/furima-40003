@@ -1,6 +1,7 @@
 class FurimasController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :check_owner, only: [:edit, :update]
+  before_action :check_owner_sold_out, only: [:edit]
   before_action :set_furima, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -69,4 +70,14 @@ class FurimasController < ApplicationController
     furima = Furima.find(params[:id])
     redirect_to root_path unless current_user == furima.user
   end
+
+  # 出品者が商品情報編集ページにアクセスしようとした場合
+  def check_owner_sold_out
+    @furima = Furima.find(params[:id])
+
+    if current_user == @furima.user && @furima.sold_out?
+      redirect_to root_path
+    end
+  end
+  
 end

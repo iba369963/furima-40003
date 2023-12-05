@@ -137,9 +137,11 @@
 
             <%= image_tag furima.image.variant(resize: '300x300'), class: 'furima-image' if furima.image.attached? %>
             <%# 商品が売れていればsold outを表示しましょう %>
+            <% if furima.sold_out? %>
             <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
+            <% end %>
             <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>

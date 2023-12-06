@@ -75,7 +75,7 @@ class FurimasController < ApplicationController
   def check_owner_sold_out
     @furima = Furima.find(params[:id])
 
-    if current_user == @furima.user && @furima.sold_out?
+    if current_user == @furima.user && @furima.log.present?
       redirect_to root_path
     end
   end

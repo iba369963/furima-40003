@@ -33,7 +33,7 @@
 
     <%= include_gon %>
 
-    <%= form_with model: @order, url: furima_logs_path, id: 'charge-form', class: 'transaction-form-wrap', local: true do |f| %>
+    <%= form_with model: @order, url: furima_logs_path, data:{ turbo: false }, id: 'charge-form', class: 'transaction-form-wrap', local: true do |f| %>
 
       <%= render 'shared/error_messages', model: f.object %>
 

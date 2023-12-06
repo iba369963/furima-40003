@@ -57,17 +57,17 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
       end
-      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+      it 'phone_numberが10桁以下商品購入できない' do
         @order.phone_number = '1345678'
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
       end
-      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+      it 'phone_numberが11桁以上だと商品購入できない' do
         @order.phone_number = '123456789101112'
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
       end
-      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+      it 'phone_numberに英字が含まれていると商品購入できない' do
         @order.phone_number = '123asd789qw'
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"

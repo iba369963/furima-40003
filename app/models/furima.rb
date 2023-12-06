@@ -24,9 +24,7 @@ class Furima < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1 }
   validates :scheduled_delivery_id, numericality: { other_than: 1 }
 
-  def sold_out?
-    Log.exists?(furima_id: id)
-  end
+
   
 
 end

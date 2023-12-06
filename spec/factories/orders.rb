@@ -7,5 +7,7 @@ FactoryBot.define do
     home_name     {'建物名'}
     phone_number  {'12345678910'}
     token         {"tok_abcdefghijk00000000000000000"}
+    association :user
+    association :furima
   end
 end

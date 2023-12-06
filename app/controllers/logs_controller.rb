@@ -40,19 +40,8 @@ class LogsController < ApplicationController
   def check_furima_owner
     @furima = Furima.find(params[:furima_id])
 
-    if user_signed_in?
-      # ログイン状態の場合
-      case action_name
-      when "index"
-        # 商品購入ページにアクセスしようとした場合
-        redirect_to root_path unless current_user != @furima.user && !@furima.sold_out?
-      # when "edit"
-      #   # 商品情報編集ページにアクセスしようとした場合
-      #   redirect_to root_path unless current_user != @furima.user || @furima.sold_out?
-      end
-    else
-      # ログアウト状態の場合
-      redirect_to new_user_session_path
+    if @furima.user.id == current_user.id || @furima.log.present?
+      redirect_to root_path
     end
   end
 

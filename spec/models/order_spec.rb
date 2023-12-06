@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
-    @order = FactoryBot.build(:order)
+    @user = FactoryBot.create(:user)
+    @furima = FactoryBot.create(:furima, user_id: @user.id)
+    @order = FactoryBot.build(:order, furima_id: @furima.id, user_id: @user.id)
   end
 
   describe '商品購入' do
@@ -55,10 +57,35 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
       end
+      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+        @order.phone_number = '1345678'
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
+      end
+      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+        @order.phone_number = '123456789101112'
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
+      end
+      it 'phone_numberが10桁以上11桁以内の半角数値のみでなければ商品購入できない' do
+        @order.phone_number = '123asd789qw'
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number は10桁以上11桁以内の半角数値で入力してください"
+      end
       it "tokenが空では登録できないこと" do
         @order.token = nil
         @order.valid?
         expect(@order.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では商品購入できない' do
+        @order.user_id = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include "User can't be blank"
+      end
+      it 'furima_idが空では商品購入できない' do
+        @order.furima_id = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Furima can't be blank"
       end
     end
   end

@@ -1,5 +1,5 @@
 class LogsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :check_furima_owner, only: [:index, :edit]
 
   def index

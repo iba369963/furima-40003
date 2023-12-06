@@ -5,7 +5,7 @@ class LogsController < ApplicationController
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order = Order.new
-    @furima = Furima.find(params[:furima_id])
+  
   end
 
   def create

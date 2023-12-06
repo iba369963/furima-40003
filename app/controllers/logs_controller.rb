@@ -1,6 +1,7 @@
 class LogsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_furima_owner, only: [:index, :edit]
+  before_action :set_furima, only: [:create, :check_furima_owner]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -9,7 +10,7 @@ class LogsController < ApplicationController
   end
 
   def create
-    @furima = Furima.find(params[:furima_id])
+    
     @order = Order.new(log_params)
   
     if @order.valid?
@@ -38,11 +39,14 @@ class LogsController < ApplicationController
   end
   
   def check_furima_owner
-    @furima = Furima.find(params[:furima_id])
 
     if @furima.user.id == current_user.id || @furima.log.present?
       redirect_to root_path
     end
+  end
+
+  def set_furima
+    @furima = Furima.find(params[:furima_id])
   end
 
 

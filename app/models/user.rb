@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :furimas
+  has_many :logs
 
   validates :nickname, presence: true
   validates :birth_date, presence: true

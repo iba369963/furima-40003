@@ -1,16 +1,18 @@
 class LogsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_furima_owner, only: [:index, :edit]
-  before_action :set_furima, only: [:create, :check_furima_owner]
+  before_action :set_order, only: [:create, :index]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    if @furima.user.id == current_user.id || @furima.log.present?
+      redirect_to root_path
+    end
     @order = Order.new
   
   end
 
   def create
-    
+  
     @order = Order.new(log_params)
   
     if @order.valid?
@@ -37,15 +39,8 @@ class LogsController < ApplicationController
       :phone_number
     ).merge(user_id: current_user.id, furima_id: @furima.id, token: params[:token])
   end
-  
-  def check_furima_owner
 
-    if @furima.user.id == current_user.id || @furima.log.present?
-      redirect_to root_path
-    end
-  end
-
-  def set_furima
+  def set_order
     @furima = Furima.find(params[:furima_id])
   end
 
